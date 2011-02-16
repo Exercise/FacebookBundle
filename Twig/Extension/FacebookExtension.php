@@ -6,7 +6,7 @@ use FOS\FacebookBundle\Twig\TokenParser\FacebookTokenParser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * 
+ *
  */
 class FacebookExtension extends \Twig_Extension
 {
@@ -14,8 +14,8 @@ class FacebookExtension extends \Twig_Extension
 
     /**
      * Constructor.
-     * 
-     * @param ContainerInterface $container 
+     *
+     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
@@ -32,6 +32,7 @@ class FacebookExtension extends \Twig_Extension
         return array(
             'facebook_initialize' => new \Twig_Function_Method($this, 'renderInitialize', array('is_safe' => array('html'))),
             'facebook_login_button' => new \Twig_Function_Method($this, 'renderLoginButton', array('is_safe' => array('html'))),
+            'facebook_registration_button' => new \Twig_Function_Method($this, 'renderRegistrationButton', array('is_safe' => array('html'))),
         );
     }
 
@@ -53,5 +54,10 @@ class FacebookExtension extends \Twig_Extension
     public function renderLoginButton($parameters = array(), $name = null)
     {
         return $this->container->get('fos_facebook.helper')->loginButton($parameters, $name ?: 'FOSFacebookBundle::loginButton.html.twig');
+    }
+
+    public function renderRegistrationButton($parameters = array(), $name = null)
+    {
+        return $this->container->get('fos_facebook.helper')->registrationButton($parameters, $name ?: 'FOSFacebookBundle::registrationButton.html.twig');
     }
 }
