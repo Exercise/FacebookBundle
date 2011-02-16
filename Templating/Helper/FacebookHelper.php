@@ -68,6 +68,16 @@ class FacebookHelper extends Helper
         ));
     }
 
+    public function registrationButton($parameters = array(), $name = null)
+    {
+        $name = $name ?: 'FOSFacebookBundle::registrationButton.html.php';
+        return $this->templating->render($name, $parameters + array(
+            'autologoutlink' => 'false',
+            'label'          => '',
+            'permissions'    => implode(',', $this->permissions),
+        ));
+    }
+
     /**
      * @codeCoverageIgnore
      */
